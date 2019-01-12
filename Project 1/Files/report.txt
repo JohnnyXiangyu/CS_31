@@ -1,0 +1,9 @@
+In the original file:
+Entering 233333333333333, the next two inputs are skipped and proportion result became -50% for all three parties, while the program decide democrats are leading congress
+Entering 0 for all three parties, the result proportion says -nan(ind)% and democrats control the congress.
+
+In the logic_error file,
+The percentage of republican seats was calculated through 1000 times the proportion, leading the program to believe in most cases republicans are leading the congress.
+
+In the compile_error file,
+A ';' is missing, and one of the cout was connected to a '>>' .
