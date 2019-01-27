@@ -1,0 +1,80 @@
+homework questions - Project 2
+Name: Wan Xiangyu
+UID: 805061659
+1.
+endlendl
+endline
+
+2.
+It takes a user input len and prints a series of "#"s inclined right ward, that the first "#" is len-1 spaces away from the left end and the last "#" is right on the left end of screen.
+
+3.
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int len;
+
+	cout << "Enter a number: ";
+	cin >> len;
+
+	for (int i = 0; i < len; i++)
+	{
+		int j = i + 1;
+		while (j < len)
+		{
+			cout << " ";
+			j++;
+		}
+		cout << "#" << endl;
+	}
+}
+
+4.
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int len;
+
+	cout << "Enter a number: ";
+	cin >> len;
+
+	int i = 0;
+	do
+	{
+		int j = i + 1;
+		while (j < len)
+		{
+			cout << " ";
+			j++;
+		}
+		if (i < len)
+		{
+			cout << "#" << endl;
+		}
+		i++;
+	} while (i < len);
+}
+
+5.
+switch (weekday)
+{
+case 1:
+	cout << "rainy days and mondays get me down";
+	break;
+case 2:
+	cout << "ruby tuesday";
+	break;
+case 6:
+	cout << "wonderful weekend";
+	break;
+case 7:
+	cout << "wonderful weekend";
+	break;
+default:
+	cout << "regular day";
+	break;
+}

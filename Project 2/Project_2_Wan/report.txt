@@ -1,0 +1,47 @@
+report_Project2
+Name: Xiangyu Wan
+UID: 805061659
+
+The greatest obstacle I faced in programming project2 is to deal with all the branches in the user inputs. Each question asked will have two different answers to tackle with while incorrect inputs should also be reported, while some of the inputs might also lead to different questions asked later in the running of the program.
+Also, matching the combination of inputs and a certain mealplan price had been tough work to do, as switch case statements cannot work for string values, I had to match the values by if...else if... statements. It was very difficult not to make minor mistakes. 
+
+Test data:
+Ticket for breakfast (Ticket, Breakfast)
+Ticket for lunch (Ticket, Lunch)
+Tickey for Dinner (Ticket, Dinner)
+
+Staff for breakfast (BruinCard, Breakfast, Staff)
+Staff for lunch (BruinCard, Lunch, Staff)
+Staff for dinner (BruinCard, Dinner, Staff)
+
+Resident student for breakfast (BruinCard, Breakfast, Student, Yes)
+Resident student for lunch (BruinCard, Lunch, Student, Yes)
+Resident student for dinner (BruinCard, Dinner, Student, Yes)
+
+Non-resident student for breakfast (BruinCard, Breakfast, Student, No)
+Non-resident student for lunch (BruinCard, Lunch, Student, No)
+Non-resident student for dinner (BruinCard, Dinner, Student, No)
+
+Random input at first question (Hahaha) 
+and (BruinCard hahahah)
+output: 
+The kind value must either be Ticket or BruinCard.
+
+Random input at second question (BruinCard, hahahah) 
+and (BruinCard, Lunch hahahahah)
+output:
+The meal value must either be Breakfast, Lunch or Dinner.
+
+Random input at third question (BruinCard, Lunch, hahahah) 
+and (BruinCard, Lunch, Staff hahahah)
+output:
+The type value must either be Student or Staff.
+
+Random input at fourth question (BruinCard, Lunch, Student, hahahah)
+and (BruinCard, Lunch, Student, Yes jajajajja)
+output:
+The resident value must either be Yes or No.
+
+Empty input (ENTER) and ( )
+output: The kind value must either be Ticket or BruinCard.
+			    
