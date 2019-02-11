@@ -1,0 +1,169 @@
+//report_project_3
+Name = Xiangyu Wan
+UID = 805061659
+
+Obstacles
+{
+The most struggling part in doing project3 is deciding the way of processing characters in the input string. For stability and ease in debugging concerns, I chose to process each character one by one, while another method, recording indexes of starting ending points of each meaningful substrings and taking them out using s.substr(), is also possible. In doing the project using the method I chose, almost all the work was done to ensure every possible value of the characters the function takes out can be considered of, and it proved to be tough job to do. 
+
+Another difficulty in this project is that, in making such a big project with over 300 lines of codes, I keep forgetting the code I have written previously. From time to time I have to scroll up the codes to see what have already been included in the functions. 
+
+I also put all the character-by-character processing work in one separate function, and have the six assigned functions calling this processing function. Yet extra codes were required to enable this function to return six different types of value according to an additional parameter indicating which function is calling this one. 
+}
+
+Design_description
+{
+My project uses two extra functions apart from the six assigned functions. One of them is the number() provided on CCLE, the other is process() that takes a string and an integer as input and returns an integer. The six assigned functions, isValidRowerString(), totalDistance(), HeartRate(), strokesPerMinute(), elapsedMinutes() and elapsedSeconds() each call the process(), and pass the input string and an integer indicator, by value, to the function, and receive an integer return.  
+In isValidRowerString(), pass the string and 0 to the process(), if return value is 1, return true, otherwise return false.
+In the rest 5 functions, pass the string and indicator, listed in the following section, to process(), and return the return value.
+
+int process(string rowerString, int index);
+The purpose of this function is to read the input string input character by character and return different values depending on which function is calling it. The first input is the input rower string, while the second parameter, index, is an indicator of the calling function: 
+	0 means isValidRowerString(), 
+	1 means minutesElapsed(), 
+	2 means secondsElapesd(), 
+	3 means strokesPerMinute(), 
+	4 means totalDistance(), 
+	5 means heartRate().
+The function starts with declaring a series of variables and arrays: 
+	values_strings[], containing 6 string values, are for the five parts of the input string - I gave it 6 values so that the index can be aligned with the indicator value parameter;
+	length, a size_t variable for the total length of the input string;
+	values[], 6 int values; from index = 0 to 5, coresponding value is validity, minutes, seconds, strokes per minute, total distance, and  heart rate, respectively.
+	empty_minutes, a bool variable initialized to false, indicating if the minutes section of the input string is empty.
+	seq_roll, an integer variable initialized to 1, an indicator of which section of the input is read now. 
+Then, the reading process starts in a for loop, from 0 to (length - 1). Each loop reads the nect character from the last one, starting at rowerString[0]; regarding the current character, there are the following situations:
+	1. Not a space
+		a. ':' while (seq_roll == 1)
+		It means the minutes section has ended, and seq_roll should jump to 2; then, run an if statement to see if empty_minutes should be marked true. 
+		b. digit
+		this digit character will be added to the end of values_string[seq_roll].
+	2. Space
+	A string variable test = "" is declared. Since in most cases spaces mark the end or beginning of numbers in the string, a switch (seq_roll) is run to see where this space is at:
+		a. seq_roll == 1
+		return -1 if the minutes value is not empty, since there should not be any spaces between minutes and seconds.
+		b. seq_roll == 2
+		seq_roll jumps to 3, indicating the next digit would be for strokes per minute.
+		c. seq_roll == 3
+		let test = the next four characters in the input string. If test s not "s/m ", or the string does not have four characters left, return -1; otherwise, jump seq_roll to 4, and skip the next four characters
+		d. seq_roll == 4
+		If length<(i+1) or while values_string[4] is not empty the next 2 characters are not 'm' and ' ', return -1; else, if the next 2 characters are 'm' and  ' ', while the distance value is not empty, jump seq_roll to 5 and have the next 2 characters skipped. 
+		e. seq_roll == 5
+		If the heart rate value is not empty for now, return -1.
+Any other case will be marked invalid input.
+Then we need to see if the values processed are valid. 
+If empty_minutes is marked true and values_string[1] == "", set values[1] = 0; if empty_minutes == false and values_string[1] is not empty, use number() to convert the string to integer; otherwise, return -1.
+Then, if values_string[2].length() == 2, let values[2] be the int converted from this string using numbers(); otherwise, return -1.
+Then run a for loop from 3 to 5, for the next 3 values in values_string[]: if any of them starts with a '0', return -1, otherwise let the corresponding values[] value be the number() convertion. 
+Set values[0] = 1, for the isValidRowerString(). Then use a series of if and else if statements to see if any of the converted values is out of range: if so, return -1.
+Finally, return values[index].
+}
+
+Test_datas
+{
+	Valid inputs:	
+		":14    28 s/m     42 m    110",
+		"        :14         28 s/m         42 m      110",
+		"1:14    28 s/m     42 m    110",
+		"59:14     28 s/m     42 m    110",
+		"59:59    28 s/m     42 m    110",
+		"59:59    999 s/m     42 m    110",
+		"59:09    999 s/m     42 m    999",
+		"59:59  999 s/m   42 m    999",
+		":00   1 s/m   42 m   1",
+		"    20:20   200 s/m   42 m   120",
+		" 1:01 20 s/m  42 m  20",
+		" 59:00  10 s/m  42 m         1",
+	Invalid inputs:
+		"14:14",
+		"14:14  14 s/m  ",
+		"14:14   14 s/m   14 m",
+		"59:59    09 s/m     42 m    110",
+		"59:9    999 s/m     2 m    110",
+		"59:59    999 s/m     42 m    010",
+		"09:59    999 s/m     42 m    110",
+		"asdf:14    28 s/m     42 m    110",
+		":14    28 s/m     42 m    110 asdf",
+		":14     28       s/m    42 m    110",
+		"0:14    28 s/m     42 m    110",
+		"0000:14    00028 s/m     00042 m   000110",
+		":-14 - 28 s/m - 42 m - 110",
+		"555 : 14    28 s/m    42 m   110",
+		":555      28 s/m      42 m  110",
+		":14    99123 s/m    42 m   110",
+		":14    0 s/m            42 m   110",
+		":14    28 s/m         42 m   99123",
+		":14    28 s/m         42 m   0",
+		": 14    28 s/m         42 m   0",
+		"59 :59    999 s/m     42 m    110",
+		"59 : 59    999 s/m     42 m    110",
+		"59:59    999 s/m     42 m    999   ",
+		"59:59    999 s/m     42 m    999AAA",
+		" 00 1 42 m 210",//missing ':' and s/m
+		" 2323 23 s/m 42 m  100", //missing ':'
+		" 23:23 23 s/  42 m  100", //missing 'm'
+		" 23:23  23 /m 42 m  100", //missing 's'
+		" 0:00 1 s/m   42 m 210", //initial '0'
+		" 23:23  0 s/m  42 m  210", //0 s/m
+		" 23:23  1 s/m  42 m  0", //0 heart rate
+		" 59:60  23 s/m  42 m  120",//out of bound sec number
+		" 60:59  23 s/m  42 m  120",//out of bound min number
+		" 23:23  1001 s/m  42 m  120",//out of bound s/m
+		" 23:23  23 s/m  42 m  1001",//out of bound heart rate
+		" 23:23  23 s / m 42 m  100",//separated s/m
+		" 23 :23  23 s/m  42 m  100",//separated num:num
+		" 23: 23  23 s/m  42 m  100",//same as the last one
+		" 2 3:23  23 s/m  42 m  100",//separated num
+		" 23:2 3  23 s/m  42 m  100",//separated num
+		" 23:23  2 3 s/m  42 m  100",//separated num
+		" 23:23  23 s/m  4 2 m  101",//separated num
+		" 23:23  23 s/m  42 m  1 01",//separated num
+		" 23:23  23 s/m  42 m  1 1",//separated num
+		" 2 23:23  23 s/m  42 m   100",//separated num
+		" 23:23 3 23 s/m  42 m  100",//separated num
+		" 23:23 0 23 s/m  42 m  100",//separated num
+		" 23:23  23 s/m  0 42 m  100",//separated num
+		" 23:23  23 s/m  42 m  ",//missing heartrate
+		" 23:23  023 s/m  42 m  100",//unexpected '0'
+		" 23:23  23 s/m  042 m  100",//unexpected '0'
+		" 23:23  23 s/m  42 m  099",//unexpected '0'
+		" 23:2323 s/m 42 m 100",//no spaces between
+		" 23:23 23 s/m42 m 100",//no spaces between
+		" 23:23 23s/m 42m100",//no spaces between
+		" 23:230 23 s/m  42 m 100",//out of digit limit
+		" 00 1 42 m 210",//missing ':' and s/m
+		" 2323 23 s/m 42 m  100", //missing ':'
+		" 23:23 23 s/  42 m  100", //missing 'm'
+		" 23:23  23 /m 42 m  100", //missing 's'
+		" 0:00 1 s/m   42 m 210", //initial '0'
+		" 23:23  0 s/m  42 m  210", //0 s/m
+		" 23:23  1 s/m  42 m  0", //0 heart rate
+		" 59:60  23 s/m  42 m  120",//out of bound sec number
+		" 60:59  23 s/m  42 m  120",//out of bound min number
+		" 23:23  1001 s/m  42 m  120",//out of bound s/m
+		" 23:23  23 s/m  42 m  1001",//out of bound heart rate
+		" 23:3  23 s/m  42 m  120",//incorrect sec digit
+		" 23:23  23 s / m 42 m  100",//separated s/m
+		" 23 :23  23 s/m  42 m  100",//separated num:num
+		" 23: 23  23 s/m  42 m  100",//same as the last one
+		" 2 3:23  23 s/m  42 m  100",//separated num
+		" 23:2 3  23 s/m  42 m  100",//separated num
+		" 23:23  2 3 s/m  42 m  100",//separated num
+		" 23:23  23 s/m  4 2 m  101",//separated num
+		" 23:23  23 s/m  42 m  1 01",//separated num
+		" 23:23  23 s/m  42 m  1 1",//separated num
+		" 2 23:23  23 s/m  42 m   100",//separated num
+		" 23:23 3 23 s/m  42 m  100",//separated num
+		" 23:23 0 23 s/m  42 m  100",//separated num
+		" 23:23  23 s/m  0 42 m  100",//separated num
+		" 23:23  23 s/m  42 m  ",//missing heartrate
+		" 23:23  023 s/m  42 m  100",//unexpected '0'
+		" 23:23  23 s/m  042 m  100",//unexpected '0'
+		" 23:23  23 s/m  42 m  099",//unexpected '0'
+		" 23:2323 s/m 42 m 100",//no spaces between
+		" 23:23 23 s/m42 m 100",//no spaces between
+		" 23:23 23 s/m 42 m100",//no spaces between
+		" 23:23  23 s/m  42m  100",//no spaces between
+		" 23:23  23s/m  42 m  100",//no spaces between
+		" 23:23  23 s/m  42 m  100 ",//spaces at the end
+		" 23:230 23 s/m  42 m 100",//out of digit limit
+}
