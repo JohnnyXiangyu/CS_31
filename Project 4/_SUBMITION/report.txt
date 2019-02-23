@@ -1,0 +1,54 @@
+name = Xiangyu Wan;
+UID = 805061659;
+
+obstacles encountered {
+	One of the difficulties I had to deal with was in the shiftRight() function, that moving one item in the array might cause the next ones overwritten. I resolved this by starting the moving actions backwards, from the last one to the first one. Since this project is fairly short and easier than the previous, not many obstacles were worth talking about.
+};
+
+
+test data {
+	string folks[8] = {
+		"samwell", "jon", "margaery", "daenerys",
+		"tyrion", "sansa", "howard123", "jon"
+	};
+
+	string people[5] = {
+		"samwell", "jon", "margaery",
+		"daenerys", "tyrion"
+	};
+
+	string sequence_test[10] = { "zzz", "zz", "z", "aaa", "aa", "Zz", "ZA", "Ba", "B", "A" };
+
+	string empty_test[5] = { " ", "", "", "", "a" };
+
+	testDuplicates(folks, 8);
+	testDuplicates(people, 5);
+	testDuplicates(empty_test, 5);
+	testAllDigits(folks, 8);
+	testAllDigits(people, 5);
+	testAllDigits(empty_test, 5);
+	testInDecreasingOrder(folks, 8);
+	testInDecreasingOrder(people, 5);
+	testInDecreasingOrder(sequence_test, 10);
+	testInDecreasingOrder(empty_test, 5);
+	testShiftRight(folks, 8, 5, "foo");
+	testShiftRight(folks, 8, 10, "foo");
+	testShiftRight(folks, 8, 8, "foo");
+	testShiftRight(folks, 0, 0, "foo");
+	testShiftRight(empty_test, 5, 3, "foo");
+	testFind(folks, 8, "jon");
+	testFind(folks, 8, "margaery");
+	testFind(folks, 5, "jon");
+	testFind(empty_test, 5, "");
+	testFind(empty_test, 5, " ");
+	testReplaceAllCharacters(folks, 8, 'a', '_');
+	testReplaceAllCharacters(folks, 8, 'b', '_');
+	testReplaceAllCharacters(folks, 8, 'c', '_');
+	testReplaceAllCharacters(folks, 8, 'd', '_');
+	testReplaceAllCharacters(folks, 8, 'e', '_');
+	testReplaceAllCharacters(empty_test, 5, ' ', '_');
+
+	//test functions receive same parameters as the tested function, and then print out some formated
+	//statements about the inputed parameters, before running the tested function and print out any
+	//possible output and/or return value.
+};

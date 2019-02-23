@@ -1,0 +1,142 @@
+input: samwell jon margaery daenerys tyrion sansa howard123 jon
+hasDuplicates: true
+
+
+input: samwell jon margaery daenerys tyrion
+hasDuplicates: false
+
+
+input:  123    a123
+hasDuplicates: true
+
+
+input:
+hasDuplicates: false
+
+
+input: samwell jon margaery daenerys tyrion sansa howard123 jon
+countAllDigits: 3
+
+
+input: samwell jon margaery daenerys tyrion
+countAllDigits: 0
+
+
+input:  123    a123
+countAllDigits: 6
+
+
+input:
+countAllDigits: -1
+
+
+input: samwell jon margaery daenerys tyrion sansa howard123 jon
+isInDecreasingOrder: false
+
+
+input: samwell jon margaery daenerys tyrion
+isInDecreasingOrder: false
+
+
+input: zzz zz z aaa aa Zz ZA Ba B A
+isInDecreasingOrder: true
+
+
+input:  123    a123
+isInDecreasingOrder: false
+
+
+input:
+isInDecreasingOrder: false
+
+
+input: samwell jon margaery daenerys tyrion sansa howard123 jon
+amount: 5, placeholder: foo
+shiftRight: 5
+output: foo foo foo foo foo samwell jon margaery
+
+
+input: samwell jon margaery daenerys tyrion sansa howard123 jon
+amount: 10, placeholder: foo
+shiftRight: 8
+output: foo foo foo foo foo foo foo foo
+
+
+input: samwell jon margaery daenerys tyrion sansa howard123 jon
+amount: 8, placeholder: foo
+shiftRight: 8
+output: foo foo foo foo foo foo foo foo
+
+
+input:
+amount: 0, placeholder: foo
+shiftRight: 0
+output:
+
+
+input:
+amount: 10, placeholder: foo
+shiftRight: -1
+output:
+
+
+input: samwell jon margaery daenerys tyrion sansa howard123 jon
+amount: -1, placeholder: foo
+shiftRight: -1
+output: samwell jon margaery daenerys tyrion sansa howard123 jon
+
+
+input: samwell jon margaery daenerys tyrion sansa howard123 jon
+match: jon
+find: 1
+
+
+input: samwell jon margaery daenerys tyrion sansa howard123 jon
+match: margaery
+find: 2
+
+
+input: samwell jon margaery daenerys tyrion
+match: jon
+find: 1
+
+
+input:
+match: jon
+find: -1
+
+
+input: samwell jon margaery daenerys tyrion sansa howard123 jon
+size: 8, findLetter: a, replaceLetter: _
+replaceAllCharacters: 7
+output: s_mwell jon m_rg_ery d_enerys tyrion s_ns_ how_rd123 jon
+
+
+input: samwell jon margaery daenerys tyrion sansa howard123 jon
+size: 8, findLetter: b, replaceLetter: _
+replaceAllCharacters: 0
+output: samwell jon margaery daenerys tyrion sansa howard123 jon
+
+
+input: samwell jon margaery daenerys tyrion sansa howard123 jon
+size: 8, findLetter: c, replaceLetter: _
+replaceAllCharacters: 0
+output: samwell jon margaery daenerys tyrion sansa howard123 jon
+
+
+input: samwell jon margaery daenerys tyrion sansa howard123 jon
+size: 8, findLetter: d, replaceLetter: _
+replaceAllCharacters: 2
+output: samwell jon margaery _aenerys tyrion sansa howar_123 jon
+
+
+input: samwell jon margaery daenerys tyrion sansa howard123 jon
+size: 8, findLetter: e, replaceLetter: _
+replaceAllCharacters: 4
+output: samw_ll jon marga_ry da_n_rys tyrion sansa howard123 jon
+
+
+input:
+size: -1, findLetter: e, replaceLetter: _
+replaceAllCharacters: -1
+output:
