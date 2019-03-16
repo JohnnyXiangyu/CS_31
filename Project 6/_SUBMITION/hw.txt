@@ -1,0 +1,184 @@
+name = Xiangyu Wan
+UID = 805061659
+
+Problem_1    
+a.    
+    #include <iostream>
+    using namespace std;
+    
+    int main()
+    {
+        int arr[4] = { 0, 1, 2, 3 };
+        int* ptr = arr;
+        *ptr = arr[ 1 ];               // set arr[0] to 1
+        *(ptr + 1) = arr[ 0 ] * 10;    // set arr[1] to 10
+        ptr += 2; 
+        ptr[0] = arr[ 1 ] * 10;        // set arr[2] to 100
+        ptr[1] = 1000;
+	ptr++;
+        while (ptr >= arr)
+        {
+            cout << " " << *(ptr--) << endl;
+        }
+        cout << endl; 
+        return( 0 ); 
+    }
+
+b.
+Passing int* p to the function won't make it a passing by reference, that the value of p is required to be defined before passing, and won't be changed during the function.
+Edited version:   
+
+    void findLastZero(int arr[], int n, int* &p)
+    {
+        p = nullptr;    /// default value if there isn't a 0 in the array at all
+        for (int k = n - 1; k >= 0; k--) 
+        {
+            if (arr[k] == 0)      // found an element whose value is 0
+            { 
+                 p = arr + k;     // change the value of p
+                 break;           // stop looping and return
+            } 
+        }
+    }                 
+    int main()
+    {
+        int nums[6] = { 10, 20, 0, 40, 30, 50 };
+        int* ptr;
+        findLastZero(nums, 6, ptr);
+        if (ptr == nullptr)
+        {
+            cout << "The array doesn't have any zeros inside it." << endl; 
+        } 
+        else
+        {
+            cout << "The last zero is at address " << ptr <<  endl;
+            cout << "It's at index " << ptr - nums << endl; 
+            cout << "The item's value is " << *ptr << " which is zero!" << endl;
+        } 
+        return( 0 ); 
+    }
+
+c.
+The function biggest() takes its third argument, pointer pointing to an int variable, by value, therefore the value of resultPtr must be initialized to an integer variable before the function accesses it.
+Edited version:
+
+    #include <iostream>
+    using namespace std;
+    void biggest(int value1, int value2, int * resultPtr)
+    {
+        if( value1 > value2 ) 
+        {
+               *resultPtr = value1;
+        } 
+        else
+        {
+               *resultPtr = value2; 
+        }
+    }
+    int main()
+    {
+        int* p = new int;
+        biggest(15, 20, p); 
+        cout << "The biggest value is " << *p << endl;
+        return( 0 );
+    }
+
+d.
+In most cases the original code is comparing the addresses while it should be comparing values.
+Edited:
+
+    // return true if two C strings are equal 
+    bool match(const char str1[], const char str2[])
+    { 
+        bool result = true; 
+        while (*str1 != 0  &&  *str2 != 0)  // zero bytes at ends 
+        {
+            if (*str1 != *str2)  // compare corresponding characters
+            {
+                result = false; 
+                break; 
+            } 
+            str1++;            // advance to the next character
+            str2++;
+        } 
+        if (result)  
+        { 
+            result = (*str1 == *str2);    // both ended at same time?
+        }
+        return( result );
+    }
+    int main()
+    {
+        char a[10] = "pointy";
+        char b[10] = "pointless"; 
+        if (match(a,b))
+        {
+            cout << "They're the same!" << endl;
+        }
+    }
+
+e.
+The second function listed in the original codes is trying to return an array while the array is defined in its own scope.
+
+
+Problem_2
+	a: 3
+	b: 4, 7
+	c: 6
+	d: 5
+	e: 8
+	f: 1
+	g: 2
+	h: 9
+
+Problem_3
+output:
+diff=4
+4
+79
+5
+9
+-1
+19
+
+Explained:
+    int main()
+    {
+        int array[6] = { 5, 3, 4, 17, 22, 19 };
+
+        int* ptr = minimart(array, & array[2]); //ptr takes the address of the bigger value in array[], so ptr now has the address of array[2]
+
+        ptr[1] = 9; //array[3] is now 9
+        ptr += 2; //ptr points to array[4]
+        *ptr = -1; //array[4] is now -1
+        *(array+1) = 79; //array[1] is now 79
+
+        cout << "diff=" << &array[5] - ptr << endl; //ptr now is pointing to array[4], so the difference is 1
+ 
+        swap1(&array[0], &array[1]); //swap1 does not change anything.
+
+        swap2(array, &array[2]); //swap2 actually swaps the two's values, so array[0] and array[2] are 4 and 5 respectively
+
+        for (int i = 0; i < 6; i++)
+            cout << array[i] << endl;
+        return( 0 );
+    } 
+
+Problem_4
+
+void deleteDigits(char* string) {
+    int* i = new int;
+    *i = 0;
+    while (*(string + (*i)) != '\0') {
+        if (isdigit(*(string + (*i)))) {
+            while (*(string + (*i)) != '\0') {
+		*(string + *i) = *(string + *i + 1);
+		(*i)++;
+    	    }
+	    *i = 0;
+	}
+	else {
+	    (*i)++;
+	}
+    }
+}

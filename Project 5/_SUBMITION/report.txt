@@ -1,0 +1,73 @@
+name = Xiangyu Wan
+UID = 805061659
+
+obstacles = {
+One prominent thing that makes this project is keeping track of all the parameters used in these methods, since most of them take five to six parameters, with specific data types and names. Since they are all positional parameters, the code's validity relies on whether or not the codes put all the types and names in the right position.
+Also the pricing part is quite complicated, but the helper class helped a lot so this part went smoothly.
+}
+
+
+test_data = {
+	Ticket t0 = b.buyTicket(kBAL, 45, "Dodgers vs. Brewers", "HAHAHA", kATH, kAM);
+	assert(t0.getPrice() == 0);
+	
+	Ticket t1 = b.buyRoyceHallTicket(kBAL, 45, "Dodgers vs. Brewers", kATH, kAM);
+	assert(t1.getPrice() == 75);
+
+	Ticket t2 = b.buyRoyceHallTicket(kBAL, 45, "Dodgers vs. Brewers", kATH, kPM);
+	assert(t2.getPrice() == 75);
+
+	Ticket t3 = b.buyRoyceHallTicket(kBAL, 45, "Dodgers vs. Brewers", kCON, kAM);
+	assert(t3.getPrice() == 50);
+
+	Ticket t4 = b.buyRoyceHallTicket(kBAL, 45, "Dodgers vs. Brewers", kCON, kPM);
+	assert(t4.getPrice() == 65);
+
+	Ticket t5 = b.buyRoyceHallTicket(kBAL, 45, "Dodgers vs. Brewers", kMOV, kAM);
+	assert(t5.getPrice() == 12.5);
+
+	Ticket t6 = b.buyRoyceHallTicket(kBAL, 45, "Dodgers vs. Brewers", kMOV, kPM);
+	assert(t6.getPrice() == 12.5);
+
+	Ticket t7 = b.buyRoyceHallTicket(kBAL, 45, "Dodgers vs. Brewers", kOTH, kAM);
+	assert(t7.getPrice() == 40);
+
+	Ticket t8 = b.buyRoyceHallTicket(kBAL, 45, "Dodgers vs. Brewers", kOTH, kPM);
+	assert(t8.getPrice() == 55);
+
+	Ticket t11 = b.buyRoyceHallTicket(kORC, 45, "Dodgers vs. Brewers", kATH, kAM);
+	assert(t11.getPrice() == 150);
+
+	Ticket t12 = b.buyRoyceHallTicket(kORC, 45, "Dodgers vs. Brewers", kATH, kPM);
+	assert(t12.getPrice() == 150);
+
+	Ticket t13 = b.buyRoyceHallTicket(kORC, 45, "Dodgers vs. Brewers", kCON, kAM);
+	assert(t13.getPrice() == 100);
+
+	Ticket t14 = b.buyRoyceHallTicket(kORC, 45, "Dodgers vs. Brewers", kCON, kPM);
+	assert(t14.getPrice() == 130);
+
+	Ticket t15 = b.buyRoyceHallTicket(kORC, 45, "Dodgers vs. Brewers", kMOV, kAM);
+	assert(t15.getPrice() == 25);
+
+	Ticket t16 = b.buyRoyceHallTicket(kORC, 45, "Dodgers vs. Brewers", kMOV, kPM);
+	assert(t16.getPrice() == 25);
+
+	Ticket t17 = b.buyRoyceHallTicket(kORC, 45, "Dodgers vs. Brewers", kOTH, kAM);
+	assert(t17.getPrice() == 80);
+
+	Ticket t18 = b.buyRoyceHallTicket(kORC, 45, "Dodgers vs. Brewers", kOTH, kPM);
+	assert(t18.getPrice() == 110);
+
+	Ticket t21 = b.buyRoyceHallStudentTicket(kBAL, 45, "Dodgers vs. Brewers", kMOV, kAM);
+	assert(t21.getPrice() == 12.5*0.8);
+
+	Ticket t22 = b.buyRoyceHallStudentTicket(kORC, 45, "Dodgers vs. Brewers", kOTH, kAM);
+	assert(t22.getPrice() == 80 - 30);
+
+	Ticket t31 = b.buyRoyceHallStaffTicket(kBAL, 45, "Dodgers vs. Brewers", kMOV, kAM);
+	assert(t31.getPrice() == 12.5*0.9);
+
+	Ticket t32 = b.buyRoyceHallStaffTicket(kORC, 45, "Dodgers vs. Brewers", kOTH, kAM);
+	assert(t32.getPrice() == 80 - 20);
+};
